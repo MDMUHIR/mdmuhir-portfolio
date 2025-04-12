@@ -6,30 +6,63 @@
       company: "Freelance",
       period: "2021 - Present",
       description:
-        "Leading development of enterprise web applications using modern technologies.",
+        "Designing and developing high-performance web applications for diverse clients using modern frontend technologies..",
       achievements: [
         "Implemented microservices architecture reducing system load by 40%",
-        "Led a team of 5 developers in successful project delivery",
-        "Introduced automated testing improving code coverage by 75%",
+        "Collaborated with cross-functional teams and led up to 5 developers to deliver complex projects on time",
+        "Integrated automated testing workflows, increasing code coverage by 75% and improving overall code reliability",
       ],
     },
-    
   ]);
 
   const educations = ref([
     {
       id: 1,
-      degree: "Master of Computer Science",
-      institution: "Tech University",
-      year: "2018",
-      description: "Specialized in Web Technologies and Cloud Computing",
+      degree: "BBA in Management",
+      institution: "Bangladesh National University",
+      year: "2023–2027 (expected)",
+      description: "Specializing in Business Management",
     },
     {
       id: 2,
-      degree: "Bachelor of Computer Science",
-      institution: "State University",
-      year: "2016",
-      description: "Major in Software Engineering",
+      degree: "Higher Secondary Certificate (HSC)",
+      institution: "Khoksa Govt. College, Kushtia",
+      year: "2020–2022",
+      description: "Business Studies Group",
+    },
+    {
+      id: 3,
+      degree: "Secondary School Certificate (SSC)",
+      institution: "Khoksa Janipur Pilot High School, Kushtia",
+      year: "2018–2020",
+      description: "Business Studies Group",
+    },
+  ]);
+
+  const courses = ref([
+    {
+      id: 1,
+      degree: "Mastering Vue.js",
+      institution: "Ostad LTD.",
+      year: "2023",
+      description:
+        "Completed an advanced-level course focused on Vue.js (Composition API, Vue Router, Pinia, and component-based architecture). Gained hands-on experience through real-world projects and interactive coding challenges.",
+    },
+    {
+      id: 2,
+      degree: "JavaScript Essentials",
+      institution: "Self-paced Learning",
+      year: "2022",
+      description:
+        "Completed a comprehensive course covering JavaScript basics, DOM manipulation, ES6 features, and asynchronous programming using Promises and async/await.",
+    },
+    {
+      id: 3,
+      degree: "Basic Web Development",
+      institution: "Softech IT",
+      year: "2020–2021",
+      description:
+        "Learned core web development skills including HTML, CSS, JavaScript, and responsive design principles. Built several beginner-level projects to understand the fundamentals of front-end development.",
     },
   ]);
 </script>
@@ -100,6 +133,28 @@
         <div class="space-y-6">
           <div
             v-for="education in educations"
+            :key="education.id"
+            class="bg-[#1b1b1b] p-6 rounded-lg shadow-sm"
+          >
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="text-xl font-semibold text-gray-50">
+                  {{ education.degree }}
+                </h3>
+                <p class="text-gray-400">{{ education.institution }}</p>
+              </div>
+              <span class="text-gray-500">{{ education.year }}</span>
+            </div>
+            <p class="mt-2 text-gray-400">{{ education.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold text-gray-100 mb-6">Courses</h2>
+        <div class="space-y-6">
+          <div
+            v-for="education in courses"
             :key="education.id"
             class="bg-[#1b1b1b] p-6 rounded-lg shadow-sm"
           >

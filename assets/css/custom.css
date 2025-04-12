@@ -1,5 +1,6 @@
 .hero-section {
-  background: linear-gradient(to right, #121212, #111111);
+  background: linear-gradient(to right, #111111, #111111);
+  /* 121212 */
   position: relative;
   overflow: hidden;
 }
