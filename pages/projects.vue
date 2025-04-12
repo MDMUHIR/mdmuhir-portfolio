@@ -1,188 +1,126 @@
 <script setup>
-  import { ref } from "vue";
   import { useProjects } from "@/composables/projects";
+  import { ref, onMounted } from "vue";
 
   const { projects, addProject, removeProject } = useProjects();
-  const showModal = ref(false);
+  const isLoaded = ref(false);
 
-  const form = ref({
-    title: "",
-    description: "",
-    technologiesInput: "",
-    demoUrl: "",
-    githubUrl: "",
+  onMounted(() => {
+    // Add a small delay to enable transition effects
+    setTimeout(() => {
+      isLoaded.value = true;
+    }, 100);
   });
-
-  const resetForm = () => {
-    form.value = {
-      title: "",
-      description: "",
-      technologiesInput: "",
-      demoUrl: "",
-      githubUrl: "",
-    };
-  };
-
-  const submitProject = async () => {
-    const techArray = form.value.technologiesInput
-      .split(",")
-      .map((t) => t.trim())
-      .filter(Boolean);
-
-    await addProject({
-      title: form.value.title,
-      description: form.value.description,
-      technologies: techArray,
-      demoUrl: form.value.demoUrl || undefined,
-      githubUrl: form.value.githubUrl || undefined,
-    });
-
-    resetForm();
-    showModal.value = false;
-  };
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-12">
-    <div class="flex justify-between items-center mb-10">
-      <h1 class="text-3xl font-bold text-gray-800">My Projects</h1>
-      <button
-        @click="showModal = true"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Add Project
-      </button>
+  <div class="max-w-7xl mx-auto px-4 py-16">
+    <div class="flex flex-col items-start mb-12">
+      <h1 class="text-4xl font-bold text-gray-300 mb-3 relative">
+        My Projects
+        <!-- <span class="absolute bottom-0 left-0 w-20 h-1 bg-[#6b0000]"></span> -->
+      </h1>
+      <p class="text-gray-300 mt-4 max-w-2xl">
+        A collection of my work showcasing various technologies and solutions.
+      </p>
     </div>
 
     <!-- Project Cards -->
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       <div
         v-for="project in projects"
         :key="project.id"
-        class="bg-white shadow-md rounded-lg p-6"
+        class="bg-gray-300 rounded-xl overflow-hidden shadow-lg hover:shadow-xl flex flex-col h-full"
+        :class="{
+          'opacity-0 translate-y-4': !isLoaded,
+          'opacity-100 translate-y-0': isLoaded,
+        }"
+        :style="{
+          transitionDelay: isLoaded
+            ? `${projects.indexOf(project) * 100}ms`
+            : '0ms',
+        }"
       >
-        <h2 class="text-xl font-semibold text-gray-900 mb-2">
-          {{ project.title }}
-        </h2>
-        <p class="text-gray-600 mb-4">{{ project.description }}</p>
+        <div class="p-6 flex-grow">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-gray-900">
+              {{ project.title }}
+            </h2>
+            <div class="w-2 h-2 rounded-full bg-indigo-600"></div>
+          </div>
 
-        <div class="mb-3">
-          <h4 class="text-sm font-medium text-gray-700">Technologies:</h4>
-          <div class="mt-2 flex flex-wrap gap-2">
-            <span
-              v-for="tech in project.technologies"
-              :key="tech"
-              class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-full"
-            >
-              {{ tech }}
-            </span>
+          <p class="text-gray-600 mb-6 line-clamp-3">
+            {{ project.description }}
+          </p>
+
+          <div class="mb-4">
+            <h4 class="text-sm font-medium text-gray-700 mb-2">
+              Technologies:
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span
+                v-for="tech in project.technologies"
+                :key="tech"
+                class="bg-gradient-to-r from-indigo-50 to-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full font-medium"
+              >
+                {{ tech }}
+              </span>
+            </div>
           </div>
         </div>
 
-        <div class="flex gap-4 mt-4">
-          <a
-            v-if="project.demoUrl"
-            :href="project.demoUrl"
-            target="_blank"
-            class="text-sm text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded"
-          >
-            Live Demo
-          </a>
-          <a
-            v-if="project.githubUrl"
-            :href="project.githubUrl"
-            target="_blank"
-            class="text-sm border border-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-100"
-          >
-            GitHub
-          </a>
+        <div class="px-6 pb-6 mt-auto">
+          <div class="flex gap-4">
+            <a
+              v-if="project.demoUrl"
+              :href="project.demoUrl"
+              target="_blank"
+              class="text-sm text-white bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 px-4 py-2 rounded-md font-medium flex-grow text-center transition-colors duration-300 shadow-sm"
+            >
+              Live Demo
+            </a>
+            <a
+              v-if="project.githubUrl"
+              :href="project.githubUrl"
+              target="_blank"
+              class="text-sm border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-md font-medium flex-grow text-center transition-colors duration-300"
+            >
+              GitHub
+            </a>
+          </div>
         </div>
-
-        <button
-          @click="removeProject(project.id)"
-          class="mt-4 text-red-500 hover:underline text-sm"
-        >
-          Delete
-        </button>
       </div>
     </div>
 
-    <!-- Add Project Modal -->
-    <div
-      v-if="showModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-    >
-      <div class="bg-white rounded-lg p-6 w-full max-w-md">
-        <h2 class="text-xl font-semibold mb-4">Add Project</h2>
-        <form @submit.prevent="submitProject" class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Title</label>
-            <input
-              v-model="form.title"
-              type="text"
-              required
-              class="w-full border rounded-md px-3 py-2 mt-1 focus:ring-blue-300 focus:outline-none"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700"
-              >Description</label
-            >
-            <textarea
-              v-model="form.description"
-              required
-              class="w-full border rounded-md px-3 py-2 mt-1 focus:ring-blue-300 focus:outline-none"
-            ></textarea>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700"
-              >Technologies (comma-separated)</label
-            >
-            <input
-              v-model="form.technologiesInput"
-              type="text"
-              required
-              class="w-full border rounded-md px-3 py-2 mt-1 focus:ring-blue-300 focus:outline-none"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700"
-              >Demo URL</label
-            >
-            <input
-              v-model="form.demoUrl"
-              type="url"
-              class="w-full border rounded-md px-3 py-2 mt-1"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700"
-              >GitHub URL</label
-            >
-            <input
-              v-model="form.githubUrl"
-              type="url"
-              class="w-full border rounded-md px-3 py-2 mt-1"
-            />
-          </div>
-
-          <div class="flex justify-end gap-3 mt-6">
-            <button
-              type="button"
-              @click="showModal = false"
-              class="px-4 py-2 bg-gray-100 text-gray-800 rounded hover:bg-gray-200"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              Add
-            </button>
-          </div>
-        </form>
+    <!-- Empty state when no projects -->
+    <div v-if="projects.length === 0" class="text-center py-16">
+      <div class="text-gray-400 mb-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-16 w-16 mx-auto"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+          />
+        </svg>
       </div>
+      <h3 class="text-xl font-medium text-gray-700">No projects yet</h3>
+      <p class="text-gray-500 mt-2">Projects you add will appear here.</p>
     </div>
   </div>
 </template>
+
+<style scoped>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

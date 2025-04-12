@@ -1,182 +1,136 @@
+<script setup>
+  import { reactive } from "vue";
+
+  const contacts = reactive([
+    {
+      name: "Email",
+      link: "mailto:mdmuhir04@gmail.com",
+      title: "mdmuhir04@gmail.com",
+      image:
+        "https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg",
+    },
+    {
+      name: "Skype",
+      link: "https://join.skype.com/invite/um45L2MIzxQP",
+      title: "Join me on Skype",
+      image: "https://api.iconify.design/logos:skype.svg",
+    },
+    {
+      name: "WhatsApp",
+      link: "https://wa.link/m875rv",
+      title: "Chat on WhatsApp",
+      image:
+        "https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/whatsapp/default.svg",
+    },
+    {
+      name: "LinkedIn",
+      link: "https://linkedin.com/in/md-muhir",
+      title: "md-muhir",
+      image:
+        "https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg",
+    },
+    {
+      name: "Twitter",
+      link: "https://twitter.com/md_muhiruddin",
+      title: "@md_muhiruddin",
+      image:
+        "https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg",
+    },
+    {
+      name: "YouTube",
+      link: "https://www.youtube.com/@codegrammarbd",
+      title: "@codegrammarbd",
+      image:
+        "https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg",
+    },
+  ]);
+  const others = reactive([
+    {
+      name: "Birthdate",
+      link: "",
+      title: "January 20, 2003",
+      image:
+        "https://api.iconify.design/material-symbols-light:calendar-month-outline-sharp.svg?color=%23f5ca65",
+    },
+    {
+      name: "Location",
+      link: "https://goo.gl/maps/Q1PpVkFcAjL2",
+      title: "Kushtia, Bangladesh",
+      image:
+        "https://api.iconify.design/mdi-light:map-marker.svg?color=%23f5ca65",
+    },
+    {
+      name: "Phone",
+      link: "tel:+8801751925103",
+      title: "+880 1751925103",
+      image:
+        "https://api.iconify.design/stash:smartphone-light.svg?color=%23f5ca65",
+    },
+  ]);
+</script>
+
 <template>
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="text-center mb-12">
-      <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-        Get in Touch
-      </h1>
-      <p class="mt-4 text-xl text-gray-500">
-        Have a question or want to work together?
+      <h1 class="text-4xl font-bold text-gray-300">Get in Touch</h1>
+      <p class="mt-4 text-lg text-gray-400">
+        Feel free to reach out — I'm always open to discussing new projects,
+        ideas, or opportunities to collaborate.
       </p>
     </div>
 
-    <form
-      @submit.prevent="submitForm"
-      class="space-y-6 bg-white p-8 rounded-lg shadow-sm"
-    >
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700"
-          >Name</label
-        >
-        <input
-          type="text"
-          id="name"
-          v-model="formData.name"
-          required
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-        />
-      </div>
-
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700"
-          >Email</label
-        >
-        <input
-          type="email"
-          id="email"
-          v-model="formData.email"
-          required
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-        />
-      </div>
-
-      <div>
-        <label for="message" class="block text-sm font-medium text-gray-700"
-          >Message</label
-        >
-        <textarea
-          id="message"
-          v-model="formData.message"
-          rows="4"
-          required
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-        ></textarea>
-      </div>
-
-      <div class="flex justify-end">
-        <button
-          type="submit"
-          :disabled="isSubmitting"
-          class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-        >
-          {{ isSubmitting ? "Sending..." : "Send Message" }}
-        </button>
-      </div>
-
-      <!-- Success/Error Messages -->
+    <!-- Contact Info Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div
-        v-if="submitStatus"
-        :class="`mt-4 p-4 rounded-md ${
-          submitStatus.type === 'success'
-            ? 'bg-green-50 text-green-800'
-            : 'bg-red-50 text-red-800'
-        }`"
+        v-for="(contact, index) in contacts"
+        :key="index"
+        class="flex items-center space-x-4 bg-[#1a1a1a] p-4 rounded-lg shadow-md hover:shadow-lg hover:bg-[#2a2a2a] transition duration-300"
       >
-        {{ submitStatus.message }}
-      </div>
-    </form>
-
-    <!-- Contact Information -->
-    <div class="mt-12 bg-white p-8 rounded-lg shadow-sm">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">
-        Other Ways to Connect
-      </h2>
-      <div class="space-y-4">
-        <div class="flex items-center">
-          <svg
-            class="h-6 w-6 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            />
-          </svg>
-          <span class="ml-3 text-gray-600">contact@example.com</span>
+        <div
+          class="flex items-center justify-center w-12 h-12 bg-[#333] rounded-full"
+        >
+          <img :src="contact.image" alt="" class="w-6 h-6" />
         </div>
-        <div class="flex items-center">
-          <svg
-            class="h-6 w-6 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-          <span class="ml-3 text-gray-600">City, Country</span>
+        <div class="flex-1">
+          <h2 class="text-sm text-[#f5ca65] font-medium">{{ contact.name }}</h2>
+          <p class="text-gray-200 text-sm break-all">
+            <a
+              v-if="contact.link"
+              :href="contact.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:underline"
+            >
+              {{ contact.title }}
+            </a>
+            <span v-else>{{ contact.title }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-gray-700 my-12"></div>
+
+    <!-- Additional Contact Methods -->
+    <div class="bg-[#1e1e1e] p-6 rounded-lg shadow-md">
+      <div
+        v-for="(contact, index) in others"
+        :key="index"
+        class="flex items-center space-x-4 bg-[#1a1a1a] p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300"
+      >
+        <div
+          class="flex items-center justify-center w-12 h-12 bg-[#333] rounded-full"
+        >
+          <img :src="contact.image" alt="" class="w-6 h-6" />
+        </div>
+        <div class="flex-1">
+          <h2 class="text-sm text-[#f5ca65] font-medium">{{ contact.name }}</h2>
+          <p class="text-gray-200 text-sm break-all">
+            {{ contact.title }}
+          </p>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-  import { collection, addDoc } from "firebase/firestore";
-
-  interface FormData {
-    name: string;
-    email: string;
-    message: string;
-  }
-
-  interface SubmitStatus {
-    type: "success" | "error";
-    message: string;
-  }
-
-  const formData = ref<FormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const isSubmitting = ref(false);
-  const submitStatus = ref<SubmitStatus | null>(null);
-
-  const submitForm = async () => {
-    isSubmitting.value = true;
-    submitStatus.value = null;
-
-    try {
-      await addDoc(collection(db, "messages"), {
-        ...formData.value,
-        createdAt: new Date(),
-      });
-
-      submitStatus.value = {
-        type: "success",
-        message: "Thank you for your message! I will get back to you soon.",
-      };
-
-      // Reset form
-      formData.value = {
-        name: "",
-        email: "",
-        message: "",
-      };
-    } catch (error) {
-      submitStatus.value = {
-        type: "error",
-        message:
-          "An error occurred while sending your message. Please try again.",
-      };
-      console.error("Error submitting form:", error);
-    } finally {
-      isSubmitting.value = false;
-    }
-  };
-</script>

@@ -2,9 +2,9 @@
   const experiences = ref([
     {
       id: 1,
-      title: "Senior Full Stack Developer",
-      company: "Tech Solutions Inc.",
-      period: "2020 - Present",
+      title: "Frontend Developer",
+      company: "Freelance",
+      period: "2021 - Present",
       description:
         "Leading development of enterprise web applications using modern technologies.",
       achievements: [
@@ -13,18 +13,7 @@
         "Introduced automated testing improving code coverage by 75%",
       ],
     },
-    {
-      id: 2,
-      title: "Full Stack Developer",
-      company: "Digital Innovations Ltd",
-      period: "2018 - 2020",
-      description: "Developed and maintained multiple client web applications.",
-      achievements: [
-        "Built responsive web applications using Vue.js and Node.js",
-        "Implemented real-time features using Firebase",
-        "Reduced page load time by 60% through optimization",
-      ],
-    },
+    
   ]);
 
   const educations = ref([
@@ -50,7 +39,7 @@
     <!-- About Section -->
     <section class="space-y-8">
       <div class="text-center">
-        <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        <h1 class="text-3xl font-extrabold text-gray-100 sm:text-4xl">
           About Me
         </h1>
         <p class="mt-4 text-xl text-gray-500">
@@ -60,36 +49,40 @@
 
       <!-- Bio Section -->
       <div class="prose prose-lg mx-auto mt-8">
-        <p class="text-gray-600">
-          I am a Full Stack Developer with a passion for building modern web
-          applications. With expertise in both frontend and backend
-          technologies, I strive to create seamless user experiences while
-          maintaining robust and scalable architectures.
+        <p class="text-gray-400">
+          With expertise in web development and hands-on experience using a
+          variety of powerful tools, I embarked on my journey in 2021 to craft a
+          meaningful career in this dynamic field. My passion for technology
+          drives me to continually enhance my skills, and I'm always eager to
+          embrace new challenges, explore emerging frameworks, and stay at the
+          cutting edge of web development. As an enthusiastic learner and
+          developer, I'm open to exciting opportunities that allow me to
+          innovate and grow in this ever-evolving landscape!
         </p>
       </div>
 
       <!-- Experience Section -->
       <div class="mt-12">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+        <h2 class="text-2xl font-bold text-gray-100 mb-6">
           Professional Experience
         </h2>
         <div class="space-y-8">
           <div
             v-for="experience in experiences"
             :key="experience.id"
-            class="bg-white p-6 rounded-lg shadow-sm"
+            class="bg-[#1b1b1b] p-6 rounded-lg shadow-sm"
           >
             <div class="flex justify-between items-start">
               <div>
-                <h3 class="text-xl font-semibold text-gray-900">
+                <h3 class="text-xl font-semibold text-gray-50">
                   {{ experience.title }}
                 </h3>
-                <p class="text-gray-600">{{ experience.company }}</p>
+                <p class="text-gray-400">{{ experience.company }}</p>
               </div>
               <span class="text-gray-500">{{ experience.period }}</span>
             </div>
-            <p class="mt-4 text-gray-600">{{ experience.description }}</p>
-            <ul class="mt-4 list-disc list-inside text-gray-600">
+            <p class="mt-4 text-gray-400">{{ experience.description }}</p>
+            <ul class="mt-4 list-disc list-inside text-gray-400">
               <li
                 v-for="(achievement, index) in experience.achievements"
                 :key="index"
@@ -103,23 +96,23 @@
 
       <!-- Education Section -->
       <div class="mt-12">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Education</h2>
+        <h2 class="text-2xl font-bold text-gray-100 mb-6">Education</h2>
         <div class="space-y-6">
           <div
             v-for="education in educations"
             :key="education.id"
-            class="bg-white p-6 rounded-lg shadow-sm"
+            class="bg-[#1b1b1b] p-6 rounded-lg shadow-sm"
           >
             <div class="flex justify-between items-start">
               <div>
-                <h3 class="text-xl font-semibold text-gray-900">
+                <h3 class="text-xl font-semibold text-gray-50">
                   {{ education.degree }}
                 </h3>
-                <p class="text-gray-600">{{ education.institution }}</p>
+                <p class="text-gray-400">{{ education.institution }}</p>
               </div>
               <span class="text-gray-500">{{ education.year }}</span>
             </div>
-            <p class="mt-2 text-gray-600">{{ education.description }}</p>
+            <p class="mt-2 text-gray-400">{{ education.description }}</p>
           </div>
         </div>
       </div>
