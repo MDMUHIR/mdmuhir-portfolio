@@ -1,4 +1,8 @@
 <script setup>
+  definePageMeta({
+    layout: "admin",
+  });
+
   import { ref } from "vue";
   import { useBlogs } from "@/composables/blogs";
 
@@ -10,7 +14,7 @@
     summary: "",
     content: "",
     tagsInput: "",
-    date: new Date().toISOString().split('T')[0],
+    date: new Date().toISOString().split("T")[0],
   });
 
   const resetForm = () => {
@@ -19,7 +23,7 @@
       summary: "",
       content: "",
       tagsInput: "",
-      date: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString().split("T")[0],
     };
   };
 
@@ -86,8 +90,12 @@
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="blog in blogs" :key="blog.id">
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm font-medium text-gray-900">{{ blog.title }}</div>
-              <div class="text-sm text-gray-500 truncate max-w-xs">{{ blog.summary }}</div>
+              <div class="text-sm font-medium text-gray-900">
+                {{ blog.title }}
+              </div>
+              <div class="text-sm text-gray-500 truncate max-w-xs">
+                {{ blog.summary }}
+              </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-500">
@@ -105,7 +113,9 @@
                 </span>
               </div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            <td
+              class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+            >
               <button
                 @click="removeBlog(blog.id)"
                 class="text-red-600 hover:text-red-900"
@@ -133,7 +143,9 @@
           <h2 class="text-xl font-bold mb-4">Add New Blog Post</h2>
           <form @submit.prevent="submitBlog" class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Title</label
+              >
               <input
                 v-model="form.title"
                 type="text"
@@ -143,7 +155,9 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Date</label
+              >
               <input
                 v-model="form.date"
                 type="date"
@@ -153,7 +167,9 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Summary</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Summary</label
+              >
               <textarea
                 v-model="form.summary"
                 required
@@ -163,7 +179,9 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Content</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Content</label
+              >
               <textarea
                 v-model="form.content"
                 required
@@ -173,7 +191,9 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Tags (comma separated)</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Tags (comma separated)</label
+              >
               <input
                 v-model="form.tagsInput"
                 type="text"

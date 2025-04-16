@@ -68,7 +68,7 @@
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 py-6">
     <!-- About Section -->
     <section class="space-y-8">
       <div class="text-center">
@@ -103,11 +103,11 @@
           <div
             v-for="experience in experiences"
             :key="experience.id"
-            class="bg-[#1b1b1b] p-6 rounded-lg shadow-sm"
+            class="bg-[#1b1b1b] p-3 sm:p-6 rounded-lg shadow-sm"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex justify-between items-start gap-x-2">
               <div>
-                <h3 class="text-xl font-semibold text-gray-50">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-50">
                   {{ experience.title }}
                 </h3>
                 <p class="text-gray-400">{{ experience.company }}</p>
@@ -134,11 +134,11 @@
           <div
             v-for="education in educations"
             :key="education.id"
-            class="bg-[#1b1b1b] p-6 rounded-lg shadow-sm"
+            class="bg-[#1b1b1b] p-3 sm:p-6 rounded-lg shadow-sm"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex justify-between items-start gap-x-2">
               <div>
-                <h3 class="text-xl font-semibold text-gray-50">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-50">
                   {{ education.degree }}
                 </h3>
                 <p class="text-gray-400">{{ education.institution }}</p>
@@ -156,11 +156,11 @@
           <div
             v-for="education in courses"
             :key="education.id"
-            class="bg-[#1b1b1b] p-6 rounded-lg shadow-sm"
+            class="bg-[#1b1b1b] p-3 sm:p-6 rounded-lg shadow-sm"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex justify-between items-start gap-x-2">
               <div>
-                <h3 class="text-xl font-semibold text-gray-50">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-50">
                   {{ education.degree }}
                 </h3>
                 <p class="text-gray-400">{{ education.institution }}</p>

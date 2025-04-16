@@ -1,4 +1,7 @@
 <script setup>
+  definePageMeta({
+    layout: "admin",
+  });
   import { ref } from "vue";
   import { useProjects } from "@/composables/projects";
 

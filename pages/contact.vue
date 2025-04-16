@@ -70,7 +70,7 @@
 </script>
 
 <template>
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold text-gray-300">Get in Touch</h1>
       <p class="mt-4 text-lg text-gray-400">

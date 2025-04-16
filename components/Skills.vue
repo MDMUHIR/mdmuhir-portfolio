@@ -1,121 +1,164 @@
-<script setup lang="ts">
-  interface Skill {
-    name: string;
-    link: string;
-    icon: string;
-    description?: string;
-  }
+<script setup>
+  import { useSkills } from "@/composables/skills";
 
-  const coreFrontend = reactive<Skill[]>([
-    {
-      name: "HTML5",
-      link: "https://www.w3.org/html/",
-      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg",
-    },
-    {
-      name: "CSS3",
-      link: "https://www.w3schools.com/css/",
-      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg",
-    },
-    {
-      name: "JavaScript",
-      link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
-    },
-    {
-      name: "TypeScript",
-      link: "https://www.typescriptlang.org/",
-      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
-    },
-  ]);
+  const { skills } = useSkills();
 
-  // Frameworks and Libraries
-
-  const frameworkLibraries = reactive([
-    {
-      name: "Vue.js",
-      link: "https://vuejs.org/",
-      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg",
-    },
-    {
-      name: "Nuxt.js",
-      link: "https://nuxtjs.org/",
-      icon: "https://www.vectorlogo.zone/logos/nuxtjs/nuxtjs-icon.svg",
-    },
-    {
-      name: "React",
-      link: "https://reactjs.org/",
-      icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg",
-    },
-  ]);
-
-  // Styling Frameworks:
-  const stylingFrameworks = reactive([
-    {
-      name: "Bootstrap",
-      link: "https://getbootstrap.com",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-    },
-    {
-      name: "Tailwind CSS",
-      link: "https://tailwindcss.com/",
-      icon: "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg",
-    },
-  ]);
-
-  // Build Tools and Version Control:
-  const buildToolsAndVersionCtrl = reactive([
-    {
-      name: "Vite",
-      link: "https://vite.dev/",
-      icon: "https://vite.dev/logo.svg",
-    },
-    {
-      name: "Git/GitHub",
-      link: "https://github.com/",
-      icon: "https://github.githubassets.com/assets/gh-desktop-7c9388a38509.png",
-    },
-  ]);
-
-  // State Management:
-  const otherSkills = reactive([
-    {
-      name: "Pinia",
-      description: "State management for vue.js",
-      link: "https://pinia.vuejs.org/",
-      icon: "https://pinia.vuejs.org/logo.svg",
-    },
-    {
-      name: "VS Code",
-      description: "Professional code editor and development environment.",
-      link: "https://code.visualstudio.com/",
-      icon: "https://api.iconify.design/mdi:microsoft-visual-studio-code.svg?color=%232d92f0",
-    },
-  ]);
+  const getSkillsByCategory = (category) => {
+    return skills.value.filter((skill) => skill.category === category);
+  };
 </script>
 
 <template>
-  <div class="max-w-4xl">
-    <div class="text- mb-16">
-      <h2
-        class="text-4xl font-semibold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-stone-400 to-blue-200"
-      >
-        Skills & Tools
-      </h2>
-      <p class="text-gray-300 text-lg">
-        My go-to technologies for modern web development
-      </p>
-    </div>
-    <!-- skills -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <PropsSkillCard :items="coreFrontend" heading="Core Frontend" />
-      <PropsSkillCard :items="frameworkLibraries" heading="Frameworks" />
-      <PropsSkillCard :items="stylingFrameworks" heading="Styling Frameworks" />
-      <PropsSkillCard
-        :items="buildToolsAndVersionCtrl"
-        heading="Build & Version Ctrl"
-      />
-      <PropsSkillCard :items="otherSkills" heading="Others" />
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Skills & Tools
+        </h2>
+        <p class="mt-4 text-lg text-gray-400">
+          Technologies and tools I work with
+        </p>
+      </div>
+
+      <!-- Core Frontend -->
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-gray-300 mb-6">Core Frontend</h3>
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          <a
+            v-for="skill in getSkillsByCategory('coreFrontend')"
+            :key="skill.id"
+            :href="skill.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+          >
+            <img :src="skill.icon" :alt="skill.name" class="h-12 w-12 mb-3" />
+            <span class="text-sm font-medium text-gray-300">{{
+              skill.name
+            }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Frameworks and Libraries -->
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-gray-300 mb-6">
+          Frameworks & Libraries
+        </h3>
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          <a
+            v-for="skill in getSkillsByCategory('frameworkLibraries')"
+            :key="skill.id"
+            :href="skill.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+          >
+            <img :src="skill.icon" :alt="skill.name" class="h-12 w-12 mb-3" />
+            <span class="text-sm font-medium text-gray-300">{{
+              skill.name
+            }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Styling Frameworks -->
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-gray-300 mb-6">
+          Styling Frameworks
+        </h3>
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          <a
+            v-for="skill in getSkillsByCategory('stylingFrameworks')"
+            :key="skill.id"
+            :href="skill.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+          >
+            <img :src="skill.icon" :alt="skill.name" class="h-12 w-12 mb-3" />
+            <span class="text-sm font-medium text-gray-300">{{
+              skill.name
+            }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Build Tools and Version Control -->
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-gray-300 mb-6">
+          Build Tools & Version Control
+        </h3>
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          <a
+            v-for="skill in getSkillsByCategory('buildTools')"
+            :key="skill.id"
+            :href="skill.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+          >
+            <img :src="skill.icon" :alt="skill.name" class="h-12 w-12 mb-3" />
+            <span class="text-sm font-medium text-gray-300">{{
+              skill.name
+            }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Other Skills -->
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-gray-300 mb-6">Other Skills</h3>
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          <a
+            v-for="skill in getSkillsByCategory('otherSkills')"
+            :key="skill.id"
+            :href="skill.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+          >
+            <img :src="skill.icon" :alt="skill.name" class="h-12 w-12 mb-3" />
+            <span class="text-sm font-medium text-gray-300">{{
+              skill.name
+            }}</span>
+            <span
+              v-if="skill.description"
+              class="text-xs text-gray-400 text-center mt-1"
+            >
+              {{ skill.description }}
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Currently Learning -->
+      <div class="mt-12">
+        <h3 class="text-xl font-semibold text-gray-300 mb-6">
+          Currently Learning
+        </h3>
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          <a
+            v-for="skill in getSkillsByCategory('learningTools')"
+            :key="skill.id"
+            :href="skill.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+          >
+            <img :src="skill.icon" :alt="skill.name" class="h-12 w-12 mb-3" />
+            <span class="text-sm font-medium text-gray-300">{{
+              skill.name
+            }}</span>
+            <span
+              v-if="skill.description"
+              class="text-xs text-gray-400 text-center mt-1"
+            >
+              {{ skill.description }}
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
