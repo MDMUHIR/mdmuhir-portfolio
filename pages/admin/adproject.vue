@@ -32,13 +32,22 @@
       .map((t) => t.trim())
       .filter(Boolean);
 
-    await addProject({
+    const projectData = {
       title: form.value.title,
       description: form.value.description,
       technologies: techArray,
-      demoUrl: form.value.demoUrl || undefined,
-      githubUrl: form.value.githubUrl || undefined,
-    });
+    };
+
+    // Only add URLs if they're not empty
+    if (form.value.demoUrl && form.value.demoUrl.trim() !== '') {
+      projectData.demoUrl = form.value.demoUrl;
+    }
+    
+    if (form.value.githubUrl && form.value.githubUrl.trim() !== '') {
+      projectData.githubUrl = form.value.githubUrl;
+    }
+
+    await addProject(projectData);
 
     resetForm();
     showModal.value = false;
@@ -48,10 +57,10 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 py-12">
     <div class="flex justify-between items-center mb-10">
-      <h1 class="text-3xl font-bold text-gray-800">My Projects</h1>
+      <h1 class="text-3xl font-bold text-white">My Projects</h1>
       <button
         @click="showModal = true"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
       >
         Add Project
       </button>

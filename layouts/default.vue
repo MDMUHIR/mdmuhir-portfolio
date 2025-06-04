@@ -8,9 +8,9 @@
 
     <!-- Main Content -->
     <main
-      class="container mx-auto px-4 sm:px-6 lg:px-8 mt-[4rem] min-h-screen z-10"
+      class="mx-auto min-h-screen z-10"
     >
-      <div class="max-w-7xl mx-auto py-6 sm:py-8 lg:py-12">
+      <div class="mx-auto py-4 sm:py-8 lg:py-12">
         <slot />
       </div>
     </main>

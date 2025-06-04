@@ -61,10 +61,10 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 py-12">
     <div class="flex justify-between items-center mb-10">
-      <h1 class="text-3xl font-bold text-gray-800">Manage Skills</h1>
+      <h1 class="text-3xl font-bold text-white">Manage Skills</h1>
       <button
         @click="showModal = true"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
       >
         Add Skill
       </button>
@@ -73,12 +73,12 @@
     <!-- Skills List -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div v-for="category in categories" :key="category.id" class="space-y-4">
-        <h2 class="text-xl font-semibold text-gray-700">{{ category.name }}</h2>
+        <h2 class="text-xl font-semibold text-gray-300">{{ category.name }}</h2>
         <div class="space-y-4">
           <div
             v-for="skill in skills.filter((s) => s.category === category.id)"
             :key="skill.id"
-            class="bg-white p-4 rounded-lg shadow flex items-center justify-between"
+            class="bg-gray-800 p-4 rounded-lg shadow flex items-center justify-between border border-gray-700"
           >
             <div class="flex items-center space-x-3">
               <img
@@ -86,12 +86,12 @@
                 :alt="skill.name"
                 class="w-8 h-8 object-contain"
               />
-              <span class="font-medium">{{ skill.name }}</span>
+              <span class="font-medium text-white">{{ skill.name }}</span>
             </div>
             <div class="flex space-x-2">
               <button
                 @click="editSkill(skill)"
-                class="text-blue-600 hover:text-blue-800"
+                class="text-red-400 hover:text-red-300"
               >
                 Edit
               </button>

@@ -4,7 +4,7 @@
       <div class="flex justify-between items-center">
         <!-- Logo/Home Link -->
         <NuxtLink
-          to="/"
+          to="/admin"
           class="text-xl font-bold text-white hover:text-red-400 transition"
         >
           Admin Panel
@@ -95,9 +95,10 @@
   const isOpen = ref(false);
 
   const navLinks = [
-    { name: "Dashboard", path: "/admin" },
+    { name: "Home", path: "/" },
     { name: "Manage Blogs", path: "/admin/adblog" },
     { name: "Manage Projects", path: "/admin/adproject" },
+    { name: "Manage Skills", path: "/admin/adskills" },
   ];
 
   const isCurrentPath = (path) => {

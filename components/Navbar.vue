@@ -9,7 +9,7 @@
 <template>
   <nav class="bg-[#111111] shadow-md relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
+      <div class="flex justify-between h-14">
         <div class="flex items-center justify-between w-full">
           <div class="flex-shrink-0 flex items-center">
             <NuxtLink
@@ -17,7 +17,14 @@
               active-class="border-indigo-500"
               class="text-xl font-bold text-gray-200"
             >
-              MD MUHIR
+              <h1 class="">
+                MD<span class="animate-ping text-red-600 text-[30px]  pl-[1px]">.</span> MUHIR
+              </h1>
+              <!-- <img 
+                src="../public/images/NavLogo.png" 
+                alt="MD MUHIR" 
+                class="h-[6rem] w-auto object-contain"
+              /> -->
             </NuxtLink>
           </div>
           <!-- Desktop Navigation -->

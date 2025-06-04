@@ -68,7 +68,9 @@
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 py-6">
+  <div
+    class="max-w-4xl mx-auto sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12 my-8 sm:my-10 "
+  >
     <!-- About Section -->
     <section class="space-y-8">
       <div class="text-center">

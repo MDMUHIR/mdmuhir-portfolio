@@ -13,14 +13,13 @@
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12 my-8 sm:my-10  bg-[#0a0b0fd0]"
+  >
     <!-- Header Section -->
     <div class="text-center mb-16">
-      <h1
-        class="text-4xl  font-bold text-gray-100 mb-2 relative inline-block"
-      >
+      <h1 class="text-4xl font-bold text-gray-100 mb-2 relative inline-block">
         My Projects
-        
       </h1>
       <p class="text-lg text-gray-400 mt-3 max-w-3xl mx-auto">
         A curated collection of my work showcasing innovative solutions and
@@ -43,7 +42,7 @@
         }"
       >
         <!-- Project Image Placeholder (you can replace with actual image) -->
-        <div
+        <!-- <div
           class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center"
         >
           <svg
@@ -60,9 +59,9 @@
               d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-        </div>
+        </div> -->
 
-        <div class="p-6 flex-grow">
+        <div class="p-6 pb-0 flex-grow">
           <div class="flex items-center justify-between mb-3">
             <h2
               class="text-xl font-bold text-gray-100 group-hover:text-red-400 transition-colors"

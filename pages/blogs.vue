@@ -21,14 +21,13 @@
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12 my-8 sm:my-10  bg-[#1a1a1a]"
+  >
     <!-- Hero Header -->
     <div class="text-center mb-16">
-      <h1
-        class="text-4xl font-bold text-gray-100 mb-2 relative inline-block"
-      >
+      <h1 class="text-4xl font-bold text-gray-100 mb-2 relative inline-block">
         My Blogs
-        
       </h1>
       <p class="text-lg text-gray-400 mt-3 max-w-3xl mx-auto">
         Deep dives into technology, design patterns, and innovative solutions
@@ -39,7 +38,7 @@
     <!-- Blog Modal -->
     <div
       v-if="expandedBlogId"
-      class="fixed inset-0 bg-gray-900/95 backdrop-blur-sm z-50 overflow-y-auto transition-opacity duration-300 ease-out"
+      class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 overflow-y-auto transition-opacity duration-300 ease-out"
       @click.self="expandedBlogId = null"
     >
       <div
@@ -138,7 +137,7 @@
         }"
       >
         <!-- Featured Image Placeholder -->
-        <div
+        <!-- <div
           class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center"
         >
           <svg
@@ -155,11 +154,9 @@
               d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
             />
           </svg>
+        </div> -->
 
-
-        </div>
-
-        <div class="p-6 flex-grow">
+        <div class="p-6 pb-0 flex-grow">
           <div class="flex items-center justify-between mb-3">
             <h3
               class="text-xl font-bold text-gray-100 group-hover:text-red-400 transition-colors"
@@ -246,8 +243,8 @@
         No blogs available
       </h3>
       <p class="text-gray-500 max-w-md mx-auto">
-        I'm currently crafting some in-depth articles. Check back soon to see my latest
-        blog posts.
+        I'm currently crafting some in-depth articles. Check back soon to see my
+        latest blog posts.
       </p>
     </div>
   </div>

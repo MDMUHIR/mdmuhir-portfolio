@@ -3,16 +3,28 @@
 </script>
 
 <template>
-  <div>
+  <div class="overflow-hidden">
     <!-- Hero Section -->
-    <section class="hero-section text-white min-h-[80vh] flex items-center">
-      <div class="sm:container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-          <div class="md:w-1/2 mb-10 md:mb-0">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold mb-4">
+    <section
+      class="hero-section dark:text-gray-200 min-h-[80vh] flex items-center relative overflow-hidden"
+    >
+      <Background />
+
+      <div
+        class="sm:container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10"
+      >
+        <div
+          class="flex flex-col md:flex-row items-center justify-between relative"
+        >
+          <div class="md:w-1/2 mb-10 md:mb-0 z-30">
+            <h1
+              class="text-4xl sm:text-5xl md:text-6xl font-semibold mb-4 text-[#c4c4c4]"
+            >
               MD. MUHIR UDDIN
             </h1>
-            <p class="text-xl text-gray-300 mb-8 max-w-lg leading-relaxed">
+            <p
+              class="text-xl text-gray-300 mb-8 max-w-lg leading-relaxed ml-1 select-none"
+            >
               Frontend developer with a passion for turning designs into
               seamless digital experiences using the latest web technologies.
               Let’s connect and build something great together.
@@ -43,13 +55,32 @@
               />
             </div>
           </div>
+
+          <!-- Neon Style -->
+          <div
+            class="absolute bottom-0 right-0 w-full h-[1.5rem] bg-white/25 filter blur-3xl z-10"
+          ></div>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
-    <section class="bg-[#1a1a1a] text-white py-20 rounded-b-2xl">
+    <!-- Services Section -->
+    <section
+      class="bg-gradient-to-t from-[#161616] to-[#161616] text-white pt-10 pb-20 relative overflow-hidden"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-14">
+        <Services />
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section
+      class="bg-gradient-to-b from-[#161616] to-[#111111] text-white pt-10 pb-20 relative overflow-hidden"
+    >
+      <div
+        class="absolute -top-10 right-0 w-full h-[5rem] bg-sky-500/10 filter blur-3xl z-10"
+      ></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-14 relative">
         <Skills />
       </div>
     </section>
@@ -90,6 +121,26 @@
 </template>
 
 <style scoped>
+  /* .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s linear infinite;
+  } */
+  /* <div
+        class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 opacity-60 blur-xl group-hover:opacity-75 transition-all duration-500 animate-gradient z-10"
+      ></div> */
+
+  /* @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  } */
+
   .hero-section {
     background: linear-gradient(to right, #111111, #111111);
     /* 121212 */
@@ -111,8 +162,19 @@
     );
   }
 
-  .framed-image1 {
+  /* .framed-image1 {
     box-shadow: -50px -50px 0 -45px var(--red), 50px 50px 0 -45px var(--red);
+  } */
+  .framed-image1 {
+    --red: #ac0000;
+
+    /* box-shadow: -50px -50px 0 -45px var(--red), 50px 50px 0 -45px var(--red); */
+    box-shadow: 
+    /* var(--red) 5px 5px, rgba(240, 46, 46, 0.3) 10px 10px,
+      rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.1) 20px 20px,
+      rgba(240, 46, 46, 0.05) 25px 25px, */ -50px -50px
+        0 -45px var(--red),
+      50px 50px 0 -45px var(--red);
   }
 
   .custom-btn {

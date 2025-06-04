@@ -16,6 +16,19 @@
       default: "",
     },
   });
+
+  // Track which skill is being hovered
+  const hoveredSkillIndex = ref<number | null>(null);
+
+  // Set the hovered skill index
+  const showTooltip = (index: number) => {
+    hoveredSkillIndex.value = index;
+  };
+
+  // Clear the hovered skill index
+  const hideTooltip = () => {
+    hoveredSkillIndex.value = null;
+  };
 </script>
 
 <template>
@@ -27,26 +40,29 @@
       <!-- Heading -->
       <div class="heading">
         <slot>
-          <h2
-            class="text-lg font-semibold text-white mb-2 bg-gradient-to-r"
-            :class="
-              props.heading === 'Currently Learning'
-                ? 'from-green-400 to-blue-500'
-                : 'from-blue-500 to-purple-500'
-            "
-            style="
-              background-clip: text;
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            "
-          >
-            {{ props.heading }}
-            <span
-              v-if="props.heading === 'Currently Learning'"
-              class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800"
-              >New</span
+          <div class="flex items-center">
+            <h2
+              class="text-lg font-semibold text-white mb-2 bg-gradient-to-r"
+              :class="
+                props.heading === 'Currently Learning'
+                  ? 'from-green-400 to-blue-500'
+                  : 'from-blue-500 to-purple-500'
+              "
+              style="
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+              "
             >
-          </h2>
+              {{ props.heading }}
+            </h2>
+            <h2
+              v-if="props.heading === 'Currently Learning'"
+              class="ml-2 inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-800"
+            >
+              New
+            </h2>
+          </div>
         </slot>
       </div>
       <!-- skill list -->
@@ -54,29 +70,32 @@
         <div
           v-for="(skill, index) in props.items"
           :key="index"
-          class="skill-item"
+          class="skill-item relative"
         >
           <a
             :href="skill.link"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center p-2 rounded-md duration-300 gap-2 hover:text-gray-500 border-red-400 border-l"
+            class="flex items-center p-3 rounded-md duration-300 gap-3 hover:bg-gray-800/50 border-l-2 border-blue-500/30 hover:border-blue-500"
+            @mouseenter="showTooltip(index)"
+            @mouseleave="hideTooltip()"
           >
             <img
               :src="skill.icon"
               :alt="skill.name"
-              class="w-5 h-5 object-contain transition-transform duration-300"
+              class="w-6 h-6 object-contain transition-transform duration-300 hover:scale-110"
             />
-            <div class="flex flex-col">
-              <span class="font-medium">
+            <div class="flex flex-col flex-1">
+              <span class="font-medium text-gray-200">
                 {{ skill.name }}
               </span>
-              <span
-                v-if="skill.description"
-                class="text-gray-400 text-xs mt-0.5"
+              <!-- Tooltip that appears on hover -->
+              <div
+                v-if="skill.description && hoveredSkillIndex === index"
+                class="tooltip"
               >
                 {{ skill.description }}
-              </span>
+              </div>
             </div>
           </a>
         </div>
@@ -95,7 +114,6 @@
     padding: 0.75rem;
     background: rgba(74, 222, 128, 0.05);
     position: relative;
-    overflow: hidden;
   }
 
   .learning-card::before {
@@ -112,6 +130,36 @@
       rgba(74, 222, 128, 0)
     );
     animation: pulse 2s infinite;
+  }
+
+  .tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(30, 41, 59, 0.95);
+    color: #e2e8f0;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    z-index: 50;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    margin-top: 0.5rem;
+    max-width: 50%;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes pulse {
