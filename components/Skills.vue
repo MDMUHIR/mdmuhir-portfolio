@@ -1,11 +1,11 @@
 <script setup>
-  import { useSkills } from "@/composables/skills";
+import { useSkills } from "@/composables/skills";
 
-  const { skills } = useSkills();
+const { skills } = useSkills();
 
-  const getSkillsByCategory = (category) => {
-    return skills.value.filter((skill) => skill.category === category);
-  };
+const getSkillsByCategory = (category) => {
+  return skills.value.filter((skill) => skill.category === category);
+};
 </script>
 
 <template>
@@ -25,17 +25,17 @@
 
       <div class="mt-12 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         <PropsSkillCard
-          :items="getSkillsByCategory('coreFrontend')"
-          heading="Core Frontend"
+          :items="getSkillsByCategory('webDevelopment')"
+          heading="Frontend Development"
         />
         <PropsSkillCard
-          :items="getSkillsByCategory('frameworkLibraries')"
-          heading="Frameworks"
+          :items="getSkillsByCategory('AIDevelopment')"
+          heading="AI Agent Development"
         />
-        <PropsSkillCard
+        <!-- <PropsSkillCard
           :items="getSkillsByCategory('stylingFrameworks')"
           heading="Styling Frameworks"
-        />
+        /> -->
         <PropsSkillCard
           :items="getSkillsByCategory('buildTools')"
           heading="Build & Version Ctrl"
@@ -49,14 +49,6 @@
           heading="Currently Learning"
         />
       </div>
-
-      <!-- Currently Learning Section -->
-      <!-- <div class="mt-12">
-        <PropsSkillCard
-          :items="getSkillsByCategory('learningTools')"
-          heading="Currently Learning"
-        />
-      </div> -->
     </div>
   </div>
 </template>

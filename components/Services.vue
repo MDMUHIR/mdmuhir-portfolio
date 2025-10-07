@@ -9,22 +9,15 @@
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
       category: "development",
     },
-    {
-      id: "service2",
-      title: "Frontend Development",
-      description:
-        "Building responsive and interactive user interfaces using modern JavaScript frameworks.",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-      category: "development",
-    },
-    {
-      id: "service3",
-      title: "API Integration",
-      description:
-        "Seamless integration with third-party APIs and services for enhanced functionality.",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-      category: "development",
-    },
+    
+    // {
+    //   id: "service3",
+    //   title: "API Integration",
+    //   description:
+    //     "Seamless integration with third-party APIs and services for enhanced functionality.",
+    //   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    //   category: "development",
+    // },
     {
       id: "service4",
       title: "AI Agent Development",
@@ -41,7 +34,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="text-center">
         <h2
-          class="text-3xl font-extrabold text-white sm:text-4xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+          class="text-3xl font-extrabold text-white sm:text-4xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent" 
         >
           Services
         </h2>
@@ -82,7 +75,5 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .service-card:hover {
-    transform: translateY(-5px);
-  }
+  
 </style>

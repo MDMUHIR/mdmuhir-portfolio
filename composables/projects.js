@@ -1,4 +1,4 @@
-import { ref, computed, watch, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { db } from "../firebase";
 import {
   collection,
@@ -7,65 +7,106 @@ import {
   deleteDoc,
   updateDoc,
   doc,
+  serverTimestamp,
+  orderBy,
+  query,
 } from "firebase/firestore";
 
 export const useProjects = () => {
   const projects = ref([]);
-  const project = ref("");
-  const projectId = ref("");
+  const loading = ref(true);
   const error = ref(null);
 
-  // Fetch projects in real-time
-  onMounted(() => {
-    const projectsRef = collection(db, "projects");
-    const unsubscribe = onSnapshot(projectsRef, (snapshot) => {
-      projects.value = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-    });
+  let unsubscribe = null;
 
-    // Cleanup subscription on component unmount
-    return () => unsubscribe();
+  // 🔥 Fetch projects in real-time (ordered by newest first)
+  onMounted(() => {
+    try {
+      const projectsRef = collection(db, "projects");
+      const q = query(projectsRef, orderBy("createdAt", "desc"));
+
+      unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+          projects.value = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          loading.value = false;
+        },
+        (err) => {
+          console.error("Error fetching projects:", err);
+          error.value = "Failed to load projects.";
+          loading.value = false;
+        }
+      );
+    } catch (e) {
+      console.error("Error initializing snapshot:", e);
+      error.value = "Error initializing data stream.";
+      loading.value = false;
+    }
   });
 
-  // Add new project
+  // 🧹 Cleanup listener on component unmount
+  onUnmounted(() => {
+    if (unsubscribe) unsubscribe();
+  });
+
+  // ➕ Add a new project
   const addProject = async (projectData) => {
     try {
       error.value = null;
-      await addDoc(collection(db, "projects"), projectData);
+
+      // Add timestamps and sanitize data
+      const newProject = {
+        title: projectData.title || "Untitled Project",
+        description: projectData.description || "",
+        technologies: projectData.technologies || [],
+        demoUrl: projectData.demoUrl || "",
+        githubUrl: projectData.githubUrl || "",
+        imageUrl: projectData.imageUrl || "", // 🖼️ image field added
+        createdAt: serverTimestamp(),
+      };
+
+      await addDoc(collection(db, "projects"), newProject);
     } catch (e) {
-      error.value = "Could not add the project";
       console.error("Error adding project:", e);
+      error.value = "Could not add the project.";
     }
   };
 
-  // Remove project
+  // 🗑️ Delete a project
   const removeProject = async (id) => {
     try {
       error.value = null;
       await deleteDoc(doc(db, "projects", id));
     } catch (e) {
-      error.value = "Could not delete the project";
       console.error("Error removing project:", e);
+      error.value = "Could not delete the project.";
     }
   };
 
-  // Update project
+  // ✏️ Update an existing project
   const updateProject = async (id, projectData) => {
     try {
       error.value = null;
-      await updateDoc(doc(db, "projects", id), projectData);
+      const projectRef = doc(db, "projects", id);
+
+      const updatedData = {
+        ...projectData,
+        updatedAt: serverTimestamp(),
+      };
+
+      await updateDoc(projectRef, updatedData);
     } catch (e) {
-      error.value = "Could not update the project";
       console.error("Error updating project:", e);
+      error.value = "Could not update the project.";
     }
   };
 
   return {
     projects,
-    project,
-    projectId,
+    loading,
     error,
     addProject,
     removeProject,

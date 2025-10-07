@@ -71,7 +71,7 @@
 
 <template>
   <div
-    class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12 my-8 sm:my-10 "
+    class="main "
   >
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold text-gray-300">Get in Touch</h1>

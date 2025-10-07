@@ -20,11 +20,10 @@
   });
 
   const categories = [
-    { id: "coreFrontend", name: "Core Frontend" },
-    { id: "frameworkLibraries", name: "Frameworks & Libraries" },
-    { id: "stylingFrameworks", name: "Styling Frameworks" },
+    { id: "webDevelopment", name: "Web Development" },
+    { id: "AIDevelopment", name: "AI Agent Development" },
     { id: "buildTools", name: "Build Tools & Version Control" },
-    { id: "otherSkills", name: "Other Skills" },
+    { id: "otherSkills", name: "Others" },
     { id: "learningTools", name: "Currently Learning" },
   ];
 
@@ -34,7 +33,7 @@
       link: "",
       icon: "",
       description: "",
-      category: "coreFrontend",
+      category: "webDevelopment",
     };
     editMode.value = false;
     selectedSkill.value = null;
